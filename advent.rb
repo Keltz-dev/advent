@@ -203,49 +203,66 @@ array = %w[1864
 # number2 = 0
 # number3 = 0
 # array.each do |num|
-#   closing_bracket = -1
-#   array.each do |num2|
-#     while num2 + num + array[closing_bracket] > 2020 && array[closing_bracket] > num2  do
-#       closing_bracket -= 1
-#     end
-#     if num2 + num + array[closing_bracket] == 2020
-#       number = num
-#       number2 = num2
-#       number3 = array[closing_bracket]
-#       break
-#     end
-#   end
+  # closing_bracket = -1
+  # array.each do |num2|
+  #   while num2 + num + array[closing_bracket] > 2020 && array[closing_bracket] > num2  do
+  #     closing_bracket -= 1
+  #   end
+  #   if num2 + num + array[closing_bracket] == 2020
+  #     number = num
+  #     number2 = num2
+  #     number3 = array[closing_bracket]
+  #     break
+  #   end
+  # end
 # end
 # puts number * number2 * number3
 # p [number, number2, number3]
 
 
 
-def doit(arr, i, max, min)
-  c = 1
-  while arr[i] + arr[i + c] < max
-    z = -1
-    sum = arr[i] + arr[i + c] + arr[z]
+# def doit(arr, i, max, min)
+#   c = 1
+#   while arr[i] + arr[i + c] < max
+#     z = -1
+#     sum = arr[i] + arr[i + c] + arr[z]
 
-    while sum > 2020 do
-      z -= 1
-      sum = arr[i] + arr[i + c] + arr[z]
-    end
+#     while sum > 2020 do
+#       z -= 1
+#       sum = arr[i] + arr[i + c] + arr[z]
+#     end
 
-    return arr[i] * arr[i + c] * arr[z] if sum == 2020
-    arr.slice!((z + 1)..-1) if z < -1
+#     return arr[i] * arr[i + c] * arr[z] if sum == 2020
+#     arr.slice!((z + 1)..-1) if z < -1
 
 
-    x = c - 2
-    x = 1 if x <= 0
+#     x = c - 2
+#     x = 1 if x <= 0
 
-    binding.pry
-    result = doit(arr, (i + 1), (sum - arr.last), (arr[i] + arr[i + x])) if sum > (arr[i + 1] + arr[i + 2] + arr.last) && (arr[i + 1] + arr[i + 2] + arr.last) >= min
-    binding.pry
-    c += 1
+#     binding.pry
+#     result = doit(arr, (i + 1), (sum - arr.last), (arr[i] + arr[i + x])) if sum > (arr[i + 1] + arr[i + 2] + arr.last) && (arr[i + 1] + arr[i + 2] + arr.last) >= min
+#     binding.pry
+#     c += 1
+#   end
+#   result
+# end
+
+# puts doit(array, 0, 2020, 0)
+# 162292410
+
+def two_sums(array, target)
+  number = 0
+  number2 = 0
+  closing_bracket = -1
+  array.each do |num|
+    closing_bracket -= 1 while num + array[closing_bracket] > target && array[closing_bracket] > num
+    next unless num + array[closing_bracket] == target
+
+    number = array.index(num)
+    number2 = array.index(array[closing_bracket])
+    break
   end
-  result
+  [number, number2]
 end
 
-puts doit(array, 0, 2020, 0)
-# 162292410
+p two_sums(array, 2020)
