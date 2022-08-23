@@ -3,7 +3,7 @@ require 'pry'
 def max_sequence(arr)
   sum = 0
   highest = 0
-  arr.each_with_index do |val, idx|
+  arr.each do |val|
     next if sum.zero? && val.negative?
 
     sum += val
@@ -12,6 +12,5 @@ def max_sequence(arr)
   end
   highest
 end
-
 
 p max_sequence([-2, 1, -3, 4, -1, 2, 1, -5, 4])
