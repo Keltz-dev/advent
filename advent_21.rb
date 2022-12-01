@@ -114,4 +114,6 @@ end
 p p1_results
 p p2_results
 p wins[1] / 27
+p wins[1]
 p wins[2] / 27
+p wins[2]
